@@ -342,6 +342,10 @@ export default function App() {
             </div>
           </div>
 
+          <div className="text-[11px] font-semibold uppercase tracking-[1px] text-sleek-muted mt-2 mb-1">
+            Engineering Interpretation
+          </div>
+
           <div className={`p-3 rounded-lg text-xs leading-[1.5] border ${isLinkViable ? 'bg-[rgba(0,209,255,0.05)] border-[rgba(0,209,255,0.2)]' : 'bg-[rgba(244,114,182,0.05)] border-[rgba(244,114,182,0.2)]'}`}>
             <div className="flex justify-between items-center mb-2">
                <strong>Status</strong>
@@ -351,27 +355,39 @@ export default function App() {
                }
             </div>
             {isLinkViable 
-                ? `At ${f >= 1000 ? (f/1000).toFixed(2) + ' GHz' : f + ' MHz'}, the link closes successfully. Margin above sensitivity floor is +${viabilityMargin.toFixed(1)}dB.`
-                : `At ${f >= 1000 ? (f/1000).toFixed(2) + ' GHz' : f + ' MHz'}, signal attenuation is critical. Power is ${Math.abs(viabilityMargin).toFixed(1)}dB below decode threshold.`
+                ? `At ${f >= 1000 ? (f/1000).toFixed(2) + ' GHz' : f + ' MHz'} and ${d}m distance, the current ${pt}W link closes successfully. Margin above sensitivity floor is +${viabilityMargin.toFixed(1)}dB. Received power is primarily influenced by ${gr + gt > 0 ? 'the ' + (gr + gt) + 'dB gain advantage' : 'the Free Space Path Loss'}.`
+                : `At ${f >= 1000 ? (f/1000).toFixed(2) + ' GHz' : f + ' MHz'} and ${d}m distance, signal attenuation is critical. Power is ${Math.abs(viabilityMargin).toFixed(1)}dB below the minimum decode threshold of ${sensitivity} dBm. Increase Tx Power or Antenna Gains to recover the link.`
             }
           </div>
 
-          <div className="text-[11px] font-semibold uppercase tracking-[1px] text-sleek-muted mt-2 mb-1">
-            Optimization Case Studies
+          <div className="text-[11px] font-semibold tracking-[1px] text-sleek-accent mt-3 mb-1 uppercase text-center border-b border-sleek-border pb-1">
+            What can we optimize in different real systems?
           </div>
 
-          <div className="grid grid-cols-2 gap-3 bg-sleek-card p-3 rounded-lg">
+          <div className="flex flex-col gap-3 bg-sleek-card p-3 rounded-lg shrink-0 mb-4">
             <div>
-              <h4 className="text-[11px] text-sleek-accent-alt mb-1">Satellite Comm</h4>
-              <p className="text-[10px] text-sleek-muted leading-[1.3]">High FSPL due to distance. Use parabolic dishes (high G) and low-noise amps.</p>
+               <h4 className="text-[12px] font-semibold text-sleek-text mb-1 flex items-center justify-between">
+                 1. Geostationary Satellite Comm
+                 <span className="text-[10px] font-normal text-sleek-accent ml-2 text-right">Fixed distance</span>
+               </h4>
+               <ul className="text-[10px] text-sleek-muted leading-[1.4] list-disc pl-3">
+                 <li><span className="text-sleek-text">Constraints:</span> Distance is massive and structurally fixed (~35,786 km). Transmit power (Pt) is heavily limited by solar array capacity.</li>
+                 <li><span className="text-sleek-text">Optimizations:</span> We must rely on maximizing <strong>antenna gains</strong> (using highly directional parabolic dishes), increasing <strong>bandwidth</strong>, advanced error correction <strong>coding</strong>, optimizing <strong>polarization</strong> matching (PLF ≈ 1), and maintaining precise <strong>pointing</strong>.</li>
+               </ul>
             </div>
-            <div>
-              <h4 className="text-[11px] text-sleek-accent-alt mb-1">Radio Astronomy</h4>
-              <p className="text-[10px] text-sleek-muted leading-[1.3]">Passive Rx. Maximize aperture size to capture faint cosmic photons.</p>
+            <div className="border-t border-sleek-border pt-3">
+               <h4 className="text-[12px] font-semibold text-sleek-text mb-1 flex items-center justify-between">
+                 2. Radio Astronomy
+                 <span className="text-[10px] font-normal text-sleek-accent-alt ml-2 text-right">Passive Rx</span>
+               </h4>
+               <ul className="text-[10px] text-sleek-muted leading-[1.4] list-disc pl-3">
+                 <li><span className="text-sleek-text">Constraints:</span> Transmitter is permanently out of our control. Distances are extreme, and frequency may be strictly constrained.</li>
+                 <li><span className="text-sleek-text">Optimizations:</span> All engineering happens at the receiver. We minimize <strong>receiver noise</strong> (cooled amps), maximize physical <strong>aperture area</strong>, use ultra-long <strong>integration time</strong>, and employ <strong>antenna arraying</strong>.</li>
+               </ul>
             </div>
           </div>
 
-          <div className="mt-auto text-[9px] text-sleek-muted text-center pt-2">
+          <div className="mt-auto text-[9px] text-sleek-muted text-center pt-2 pb-4 shrink-0">
             Physics Engine: Friis Eq v2.1 • c = 3.0e8 m/s
           </div>
 
