@@ -1,0 +1,6 @@
+{
+  "name": "Friis Transmission Equation Simulator",
+  "description": "Interactive educational tool to learn the Friis Transmission Equation and radio wave propagation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
