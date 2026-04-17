@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { Settings2, RefreshCcw, Wifi, AlertTriangle, CheckCircle2, Activity, Zap, Info, Sun, Moon, Download, FileText, Image as ImageIcon } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBolt } from '@fortawesome/free-solid-svg-icons';
 import { toPng } from 'html-to-image';
 
 export default function App() {
@@ -155,7 +157,9 @@ export default function App() {
       {/* Header */}
       <header className="h-[56px] px-6 flex items-center justify-between border-b border-sleek-border bg-sleek-card shrink-0">
         <div className="font-bold tracking-tight text-sleek-accent flex items-center gap-2">
-          <div className="w-6 h-6 border-2 border-sleek-accent rounded flex items-center justify-center text-xs">λ</div>
+          <div className="w-6 h-6 border-2 border-sleek-accent rounded flex items-center justify-center text-xs">
+            <FontAwesomeIcon icon={faBolt} className="text-[11px]" />
+          </div>
           FRIIS WIRELESS EXPLORER
         </div>
         <div className="flex gap-3 items-center">
